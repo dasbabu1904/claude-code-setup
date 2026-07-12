@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest*)",
+      "Bash(make lint)",
+      "Bash(make format)",
+      "Bash(make style)",
+      "Bash(make types)",
+      "Bash(make migrate)",
+      "Bash(make migration *)",
+      "Bash(flake8*)",
+      "Bash(black *)",
+      "Bash(isort *)",
+      "Bash(mypy*)",
+      "Bash(alembic upgrade head)",
+      "Bash(docker exec * alembic upgrade head)",
+      "Bash(docker exec -it * alembic upgrade head)",
+      "Bash(docker compose * run --rm * alembic upgrade head)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm type-check)",
+      "Bash(uvicorn *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log)",
+      "Bash(git log *)",
+      "Bash(git branch)",
+      "Bash(git branch -a)",
+      "Bash(git branch -v)",
+      "Bash(git branch --show-current)"
+    ]
+  }
+}
