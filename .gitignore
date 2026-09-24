@@ -1,9 +1,1 @@
-# This root is a meta-repo for Claude Code configuration/docs only.
-# Every service subdirectory is its own separate git repo with its
-# own remote and is intentionally excluded here.
-/*
-!/.gitignore
-!/CLAUDE.md
-!/knowledge.md
-!/.claude/
-!/.claude/**
+
