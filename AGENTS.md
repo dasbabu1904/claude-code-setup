@@ -6,6 +6,9 @@
 
 @knowledge.md
 
+For the repository PR-review and merge-preparation workflow, follow
+[PR_REVIEW_RULES.md](PR_REVIEW_RULES.md).
+
 ---
 
 ## Repository Branches
@@ -536,6 +539,44 @@ Default workflow:
 INSPECT → PROPOSE → APPROVE → IMPLEMENT → VERIFY → EXPLAIN
 ```
 
+The detailed repository issue-resolution process is documented in
+[`ISSUE_RESOLUTION_RULE.md`](ISSUE_RESOLUTION_RULE.md).
+
+Critical approval rule: do not modify business logic before the user's
+business, product, architecture, security, compatibility, and rollout
+decisions have been identified, explained, and explicitly approved one by one.
+Before approval, perform investigation and prepare the problem explanation,
+possible-solution documents, and decision record only. The proposal must
+explicitly explain business-logic changes, API request/response or status-code
+changes, validation rules, compatibility behavior, and failure modes. Apply
+strict logic validation and close all material gaps before implementation.
+An approval authorizes only the exact behavior and file scope described in the
+decision-complete proposal; request approval again if either changes.
+
+Required issue-document structure: the problem explanation must be written
+issue-by-issue, not only as a consolidated report. Each material issue must
+contain: (1) problem explanation, (2) business-logic impact, (3) API behavior
+impact, (4) an explicit numbered decision question, (5) possible choices with
+consequences, and (6) a recommendation. The solution document must preserve
+the same numbering, explain alternatives and trade-offs, and record each
+decision as `Approved`, `Rejected`, or `Pending`. Do not implement until the
+decision-complete proposal has passed strict logic validation and the user has
+approved the exact scope.
+
+For an issue-resolution request following `ISSUE_RESOLUTION_RULE.md`, treat
+the problem explanation and its corresponding solution document as a required
+pair. Propose both exact file paths and their scope together, then request
+approval once before creating either file. If that paired document scope is
+approved, create both without asking for approval again unless the scope
+changes. This document approval does not approve any pending business,
+product, architecture, security, compatibility, rollout, or implementation
+decision.
+
+PR review round workflow:
+- When a pull request receives reviewer feedback requesting changes (`CHANGES_REQUESTED` or material concerns), treat each review iteration as a gated issue-resolution cycle under `ISSUE_RESOLUTION_RULE.md` Gate 11.
+- Create paired planning documents named `issue-<id>-pr-review-round<N>-problem-explanation.md` and `issue-<id>-pr-review-round<N>-solution-design.md` in `Documentation/issues/`.
+- Present the review findings, formulate numbered decisions, and obtain explicit user approval before modifying code or business logic.
+
 An approval applies only to the exact scope described in the proposal. If the scope
 changes, pause and request approval again.
 
@@ -720,6 +761,13 @@ During implementation:
 ---
 
 # 27. Pull Request Reviews
+
+## Accessing GitHub Issues and Pull Requests
+
+- Use the `gh` CLI to inspect issues and pull requests, including private repositories.
+- Run `gh issue view` or `gh pr view` from the checkout for the target repository so GitHub CLI can infer the repository. If that checkout is unavailable or inference fails, pass `--repo OWNER/REPO` explicitly.
+- If the GitHub API call fails because network access is restricted, retry the same command with network access approval. A successful `gh` login in another terminal or conversation does not guarantee credentials or network access are available in this session.
+- Never ask the user to share or expose an SSH private key or GitHub token. Use the authenticated GitHub CLI session when available.
 
 When asked to review a pull request, provide an evidence-based review that:
 
